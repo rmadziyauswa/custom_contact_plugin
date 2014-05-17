@@ -68,6 +68,6 @@ if(!is_admin() && isset($_POST['cSubject']))
 	}
 	else
 	{
-		echo "Mail Not Sent";
+		echo "Mail Not Sent. Check your mail settings";
 	}
 }
