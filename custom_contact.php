@@ -49,25 +49,29 @@ function custom_contact_menu()
 	add_menu_page("Contact Form Admin","Custom Contact Form","manage_options","ccf_menu","custom_contact_menu_page");
 }
 
-add_action("admin_menu","custom_contact_menu");
-add_shortcode('custom_contact','custom_contact_print');
-
-
-
-
-//send an email to the blog admin if the send button on contact form is pressed
-if(!is_admin() && isset($_POST['cSubject']))
+function custom_contact_form_post()
 {
-	$to = get_option('admin_email');
-	$subject = $_POST['cSubject'];
-	$message = $_POST['cMessage'];
+	
+	//send an email to the blog admin if the send button on contact form is pressed
+	if(!is_admin() && isset($_POST['cSubject']))
+	{
+		$to = get_option('admin_email');
+		$subject = $_POST['cSubject'];
+		$message = $_POST['cMessage'];
 
-	if(mail($to,$subject,$message))
-	{
-		echo "Sent";
-	}
-	else
-	{
-		echo "Mail Not Sent. Check your mail settings";
+		if(mail($to,$subject,$message))
+		{
+			echo "Sent";
+		}
+		else
+		{
+			echo "Mail Not Sent. Check your mail settings";
+		}
 	}
 }
+
+
+//action hooks and filters section
+add_action("admin_menu","custom_contact_menu");
+add_shortcode('custom_contact','custom_contact_print');
+custom_contact_form_post();
