@@ -20,11 +20,13 @@ function custom_contact_print()
 		
 		if(!is_admin())
 	{
+	
+		
 		echo "<h2>Contact Us</h2>";
 		echo "<div><form action='' method='post'><legend>Fill in the fields and send</legend>
-		<label for='cSubject'>Subject</label><input type='text' name='cSubject' id='cSubject' />
-		<label for='cEmail'>Email</label><input type='text' name='cEmail' id='cEmail' />
-		<label for='cMessage'>Message</label><textarea name='cMessage' id='cMessage'></textarea>
+		<label for='cSubject'>Subject</label><input type='text' name='cSubject' id='cSubject' /><br />
+		<label for='cEmail'>Email</label><input type='text' name='cEmail' id='cEmail' /><br />
+		<label for='cMessage'>Message</label><textarea name='cMessage' id='cMessage'></textarea><br />
 		<input type='submit' name='btnSubmit' id='btnSubmit' value='Send'/>
 		</form></div>";
 		}
@@ -66,6 +68,6 @@ if(!is_admin() && isset($_POST['cSubject']))
 	}
 	else
 	{
-		echo "Mail Not Sent";
+		echo "Mail Not Sent. Check your mail settings";
 	}
 }
