@@ -13,10 +13,10 @@ License: GPL
 This program is free software; you can redistribute it 
 */
 
-function custom_contact_print()
+function custom_contact_print($atts)
 {
 
-		
+		//$atts will for shortcode attributes but we are not using them in this case
 		
 		if(!is_admin())
 	{
@@ -59,19 +59,25 @@ function custom_contact_form_post()
 		$subject = $_POST['cSubject'];
 		$message = $_POST['cMessage'];
 
-		if(mail($to,$subject,$message))
-		{
-			echo "Sent";
-		}
-		else
-		{
-			echo "Mail Not Sent. Check your mail settings";
-		}
+		mail($to,$subject,$message);
 	}
 }
 
 
+function custom_contact_activation()
+{
+	//activation code
+}
+
+function custom_contact_deactivation()
+{
+		//deactivation code
+
+}
+
 //action hooks and filters section
+register_activation_hook(__FILE__, 'custom_contact_activation');
+register_deactivation_hook(__FILE__, 'custom_contact_deactivation');
 add_action("admin_menu","custom_contact_menu");
 add_shortcode('custom_contact','custom_contact_print');
 custom_contact_form_post();
